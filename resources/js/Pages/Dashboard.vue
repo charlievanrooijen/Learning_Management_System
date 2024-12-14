@@ -1,5 +1,9 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import AdminDashboard from './Dashboard/AdminDashboard.vue';
+import TeacherDashboard from './Dashboard/TeacherDashboard.vue';
+import StudentDashboard from './Dashboard/StudentDashboard.vue';
+
 import { Head } from '@inertiajs/vue3';
 
 defineProps({
@@ -35,8 +39,14 @@ defineProps({
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <h1 class="text-2xl font-bold">Welcome, {{ user.name }}!</h1>
-                        <p class="mt-2">Your role is: <span class="font-semibold">{{ user.role }}</span></p>
+                        <div>
+                            <h1 class="text-2xl font-bold">Welcome, {{ user.name }}!</h1>
+                            <div class="mt-6">
+                                <AdminDashboard v-if="user.role === 'Admin'" />
+                                <TeacherDashboard v-else-if="user.role === 'Teacher'" />
+                                <StudentDashboard v-else-if="user.role === 'Student'" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
