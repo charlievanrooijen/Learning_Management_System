@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quiz;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class QuizController extends Controller
 {
@@ -39,5 +39,16 @@ class QuizController extends Controller
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Quiz created successfully.');
+    }
+
+
+    public function index()
+    {
+        $quizzes = Quiz::where('status', 'public')->take(5)->get();
+
+        return Inertia::render('Dashboard', [
+            'user' => Auth::user(),
+            'quizzes' => $quizzes,
+        ]);
     }
 }
