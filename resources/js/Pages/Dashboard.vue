@@ -26,6 +26,7 @@ const props = defineProps({
 </script>
 
 <template>
+
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
@@ -67,7 +68,11 @@ const props = defineProps({
                             <p>No quizzes available at the moment.</p>
                         </div>
                         <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                            <QuizTeaser v-for="quiz in quizzes" :key="quiz.id" :quiz="quiz" />
+                            <QuizTeaser v-for="quiz in quizzes" 
+                                :key="quiz.id" 
+                                :quiz="quiz" 
+                                :userId="user.id"
+                                :userRole="user.role" />
                         </div>
                     </div>
                 </div>

@@ -25,11 +25,12 @@ class QuizController extends Controller
         if (Auth::id() !== $quiz->author_id && Auth::user()->role !== 'Admin') {
             abort(403, 'Unauthorized action.');
         }
-
+    
         return Inertia::render('Quizzes/Edit', [
             'quiz' => $quiz,
         ]);
     }
+    
 
 
     public function update(Request $request, Quiz $quiz)

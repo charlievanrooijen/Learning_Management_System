@@ -18,10 +18,8 @@ const props = defineProps({
             {{ new Date(attempt.created_at).toLocaleString() }}
         </p>
         <div class="mt-4">
-            <button
-                @click="$inertia.visit(route('quiz-attempt.review', attempt.id))"
-                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            >
+            <button @click="$inertia.visit(route('quiz-attempt.review', attempt.id))"
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                 View Details
             </button>
         </div>
