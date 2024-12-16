@@ -9,7 +9,7 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 const form = useForm({
     name: '',
     email: '',
-    role: 'Student',
+    role: '',
     password: '',
     password_confirmation: '',
 });
@@ -44,16 +44,19 @@ const submit = () => {
 
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
-            
+
             <div class="mt-4">
                 <InputLabel for="role" value="Role" />
 
-                <select id="role" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                <select id="role"
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                     v-model="form.role" required>
-                    <option selected="selected" value="Student">Student</option>
+                    <option disabled value="">Select a Role</option>
+                    <option value="Student">Student</option>
                     <option value="Teacher">Teacher</option>
                     <option value="Admin">Admin</option>
                 </select>
+
 
                 <InputError class="mt-2" :message="form.errors.role" />
             </div>
