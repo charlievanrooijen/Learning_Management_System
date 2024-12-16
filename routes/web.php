@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuizAttemptController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -22,10 +23,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/quizzes/{quiz}/edit', [QuizController::class, 'edit'])
-    ->middleware(['auth', 'verified'])
-    ->name('quizzes.edit');
+        ->middleware(['auth', 'verified'])
+        ->name('quizzes.edit');
     Route::put('/quizzes/{quiz}', [QuizController::class, 'update'])
-    ->name('quizzes.update');
+        ->name('quizzes.update');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/quizzes/{quiz}/take', [QuizController::class, 'takeQuiz'])->name('quizzes.take');
+    Route::post('/quizzes/{quiz}/submit', [QuizController::class, 'submitQuiz'])->name('quizzes.submit');
+});
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::post('/quizzes/{quiz}/attempt', [QuizAttemptController::class, 'store'])->name('quiz-attempt.store');
+    Route::get('/quiz-attempts/{attempt}/review', [QuizAttemptController::class, 'review'])->name('quiz-attempt.review');
 });
 
 Route::get('/dashboard', [QuizController::class, 'index'])
