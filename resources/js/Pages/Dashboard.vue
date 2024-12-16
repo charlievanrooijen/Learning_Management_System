@@ -6,7 +6,7 @@ import StudentDashboard from './Dashboard/StudentDashboard.vue';
 
 import { Head } from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     user: {
         type: Object,
         required: true,
@@ -67,11 +67,9 @@ defineProps({
                             <div v-for="quiz in quizzes" :key="quiz.id" class="border p-4 rounded-lg shadow-sm">
                                 <h3 class="text-lg font-semibold">{{ quiz.title }}</h3>
                                 <p class="text-gray-600 mt-2">{{ quiz.description }}</p>
-                                <button
-                                    class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                                    @click="$inertia.visit(`/quizzes/${quiz.id}`)"
-                                >
-                                    Do Quiz
+                                <button @click="$inertia.visit(route('quizzes.edit', quiz.id))"
+                                    class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+                                    Edit Quiz
                                 </button>
                             </div>
                         </div>

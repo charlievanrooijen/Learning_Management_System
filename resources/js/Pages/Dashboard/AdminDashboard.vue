@@ -1,5 +1,4 @@
 <script setup>
-console.log('Admin-specific dashboard');
 </script>
 
 <template>

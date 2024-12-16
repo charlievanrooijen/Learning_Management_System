@@ -20,6 +20,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/quizzes', [QuizController::class, 'store'])->name('quizzes.store');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/quizzes/{quiz}/edit', [QuizController::class, 'edit'])
+    ->middleware(['auth', 'verified'])
+    ->name('quizzes.edit');
+    Route::put('/quizzes/{quiz}', [QuizController::class, 'update'])
+    ->name('quizzes.update');
+});
+
 Route::get('/dashboard', [QuizController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
@@ -30,4 +38,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -1,5 +1,4 @@
 <script setup>
-console.log('Student-specific dashboard');
 </script>
 
 <template>
