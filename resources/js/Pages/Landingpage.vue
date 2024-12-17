@@ -25,40 +25,6 @@ function handleImageError() {
     document.getElementById('background')?.classList.add('!hidden');
 }
 </script>
->
-<style>
-.feature-block {
-    display: flex;
-    align-items: start;
-    gap: 1rem;
-    border-radius: 0.5rem;
-    background-color: white;
-    padding: 1.5rem;
-    box-shadow: 0px 14px 34px 0px rgba(0, 0, 0, 0.08);
-    ring: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s;
-}
-
-.feature-block:hover {
-    color: rgba(0, 0, 0, 0.7);
-    ring-color: rgba(0, 0, 0, 0.2);
-}
-
-.feature-block:focus-visible {
-    ring-color: #FF2D20;
-    outline: none;
-}
-
-.feature-block.dark {
-    background-color: #1C1C1C;
-    ring-color: #212121;
-}
-
-.feature-block.dark:hover {
-    color: rgba(255, 255, 255, 0.7);
-    ring-color: #2D2D2D;
-}
-</style>
 <template>
 
     <Head title="Welcome" />
@@ -78,6 +44,12 @@ function handleImageError() {
                         </svg>
                     </div>
                     <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
+                        <Link v-if="$page.props.auth.user" :href="route('search')"
+                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
+                        Search for quiz
+                        </Link>
+
+
                         <Link v-if="$page.props.auth.user" :href="route('dashboard')"
                             class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                         Dashboard

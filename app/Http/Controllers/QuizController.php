@@ -25,12 +25,12 @@ class QuizController extends Controller
         if (Auth::id() !== $quiz->author_id && Auth::user()->role !== 'Admin') {
             abort(403, 'Unauthorized action.');
         }
-    
+
         return Inertia::render('Quizzes/Edit', [
             'quiz' => $quiz,
         ]);
     }
-    
+
 
 
     public function update(Request $request, Quiz $quiz)
@@ -88,6 +88,22 @@ class QuizController extends Controller
             'user' => Auth::user(),
             'quizzes' => $quizzes,
             'recentAttempts' => $recentAttempts,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Search for quizzes in title and description
+        $quizzes = Quiz::query()
+            ->where('title', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->get();
+
+        return Inertia::render('Quizzes/Search', [
+            'quizzes' => $quizzes,
+            'query' => $query,
         ]);
     }
 

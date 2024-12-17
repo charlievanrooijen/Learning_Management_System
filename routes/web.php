@@ -19,17 +19,14 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/quizzes/create', [QuizController::class, 'create'])->name('quizzes.create');
     Route::post('/quizzes', [QuizController::class, 'store'])->name('quizzes.store');
-});
-
-Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/quizzes/{quiz}/edit', [QuizController::class, 'edit'])
         ->middleware(['auth', 'verified'])
         ->name('quizzes.edit');
     Route::put('/quizzes/{quiz}', [QuizController::class, 'update'])
         ->name('quizzes.update');
-});
 
-Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/quizzes/search', [QuizController::class, 'search'])->name('quizzes.search');
+
     Route::get('/quizzes/{quiz}/take', [QuizController::class, 'takeQuiz'])->name('quizzes.take');
     Route::post('/quizzes/{quiz}/submit', [QuizController::class, 'submitQuiz'])->name('quizzes.submit');
 });
